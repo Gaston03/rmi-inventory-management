@@ -21,7 +21,6 @@
             <groupId>ma.supmti</groupId>
             <artifactId>server</artifactId>
             <version>1.0.1</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
