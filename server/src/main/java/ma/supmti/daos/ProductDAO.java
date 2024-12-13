@@ -39,15 +39,13 @@ public class ProductDAO {
                 "price = ? " +
                 "WHERE id = ?";
 
-        Product savedProduct = findProductById(id);
-
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, Objects.equals(product.name(), "") ? savedProduct.getName() : product.name());
-            stmt.setString(2, Objects.equals(product.category(), "") ? savedProduct.getCategory() : product.category());
-            stmt.setLong(3, Objects.equals(product.quantity(), 0L) ? savedProduct.getQuantity() : product.quantity());
-            stmt.setDouble(4, Objects.equals(product.price(), 0.0) ? savedProduct.getPrice() : product.price());
+            stmt.setString(1, product.name());
+            stmt.setString(2, product.category());
+            stmt.setLong(3, product.quantity());
+            stmt.setDouble(4, product.price());
             stmt.setLong(5, id);
 
             int affectedRows = stmt.executeUpdate();

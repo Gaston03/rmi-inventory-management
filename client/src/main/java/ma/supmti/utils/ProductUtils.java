@@ -35,11 +35,6 @@ public class ProductUtils {
     }
 
     public static void promptToUpdateProduct(Scanner sc, RemoteListenner listener) throws RemoteException, SQLException {
-        String name = "";
-        String category = "";
-        long quantity = 0L;
-        double price = 0.0;
-
         System.out.println("========== UPDATE PRODUCT ==========");
 
         System.out.print("- Product ID: ");
@@ -47,6 +42,10 @@ public class ProductUtils {
         sc.nextLine();
 
         Product savedProduct = listener.getProductService().findProductById(id);
+        String name = savedProduct.getName();
+        String category = savedProduct.getCategory();
+        Long quantity = savedProduct.getQuantity();
+        Double price = savedProduct.getPrice();
 
         System.out.print("Do you want to update Name " + "(" + savedProduct.getName() + ")" + " ? [Y/N] ");
         String nameChoice = sc.nextLine();
