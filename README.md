@@ -1,6 +1,6 @@
 # Inventory Management
 
-#### This project is an implementation of a distributed inventory management system using Java RMI (Remote Method Invocation). This system facilitates communication between a client and server for managing inventory operations.
+This project is an implementation of a distributed inventory management system using Java RMI (Remote Method Invocation). This system facilitates communication between a client and server for managing inventory operations.
 
 ## Key features
 
