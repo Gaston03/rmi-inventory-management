@@ -26,7 +26,7 @@ Contains the server-side logic, including the RMI implementation for inventory m
 ## Getting Started
 
 ### Prerequisites
-- Java Development Kit (JDK) 8 or later
+- Java Development Kit (JDK) 21 or later
 - Apache Maven
 - Basic understanding of Java RMI
 
@@ -40,4 +40,22 @@ cd rmi-inventory-management
 Run the following command to compile the code and package the application:
 ```shell
 mvn clean install
+```
+
+### Run Server
+Navigate to the `server` directory and run the server:
+```shell
+
+```
+
+### Run Client
+Navigate to the `client` directory and run the client:
+```shell
+
+```
+
+## Author
+- Gaston03
+```vbnet
+If additional details about the inventory operations or specific classes are available, they can be included in the `README` for better clarity. Let me know if you'd like to customize this further!
 ```
