@@ -12,17 +12,30 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            /*
+            *  Initialize database by creating [Products] and [Users] databases
+            * */
             DatabaseConnection.initializeDatabase();
             ProductService productService = new ProductServiceImpl();
 
+            /*
+            * Check if test products have already been inserted
+            * If not, insert them in [Products] database
+            * */
             if (productService.findAllProducts().isEmpty()) {
                 DatabaseConnection.insertTestData();
             }
 
-            // RMI setup
+            /*
+            * Set up RMI registry on port [8000]
+            * It's mean that the server will be listening to request on that port
+            * */
             Registry registry = LocateRegistry.createRegistry(8000);
 
-            // Bind the remote objects
+            /*
+            * Bind the [ProductService] and [UserService] objects
+            * So that they be used on client side
+            * */
             registry.bind("ProductService", productService);
             registry.bind("UserService", new UserServiceImpl());
 
