@@ -22,10 +22,10 @@ public class DatabaseConnection {
     private static final String USERNAME = "ulysse";
     private static final String PASSWORD = "24wDgfAC5tq0NX4iVFmpaVSNBC9ILaQg";
 
-    /*
+    /**
     * Establishes and returns a connection to the database.
-    * throws: SQLException if a connection error occurs.
-    * returns: Connection object.
+    * @returns: Connection object.
+    * @throws: SQLException if a connection error occurs.
     * */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);

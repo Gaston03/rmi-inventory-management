@@ -9,8 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/*
+* The [ProductDAO] class manages database operations
+* for the [products] table in the inventory system.
+* */
 public class ProductDAO {
 
+    /**
+    * Inserts a new product into the products table.
+    * @param product (Data Transfer Object with product details).
+    * @return boolean indicating success or failure.
+    * @throws SQLException
+    * */
     public boolean save(ProductDTO product) throws SQLException {
         String sql = "INSERT INTO products (name, category, quantity, price) VALUES (?, ?, ?, ?)";
 
@@ -31,6 +41,12 @@ public class ProductDAO {
         }
     }
 
+    /**
+    * Updates an existing product's details by ID.
+     * @param product (Data Transfer Object with product details), id (Product ID to update).
+     * @return boolean indicating success or failure.
+     * @throws SQLException
+    * */
     public boolean updateProduct(ProductDTO product, Long id) throws SQLException {
         String sql = "UPDATE products " +
                 "SET name = ?, " +
@@ -56,6 +72,12 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Delete an existing product's details by ID.
+     * @param id (ID of the product to delete).
+     * @return boolean indicating success or failure.
+     * @throws SQLException
+     * */
     public boolean deleteProduct(Long id) throws SQLException {
         String sql = "DELETE FROM products WHERE id = ?";
 
@@ -71,6 +93,12 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Retrieves a list of products that match a category.
+     * @param category (The category filter).
+     * @return List<Product> (containing matching products).
+     * @throws SQLException
+     * */
     public List<Product> findProductByCategory(String category) throws SQLException {
         String sql = "SELECT * FROM " +
                 "products WHERE category ILIKE ? " +
@@ -102,6 +130,11 @@ public class ProductDAO {
         return products;
     }
 
+    /**
+     * Retrieves all products in the database.
+     * @return List<Product> (containing all products).
+     * @throws SQLException
+     * */
     public List<Product> findAllProducts() throws SQLException {
         String sql = "SELECT * FROM products " +
                 "ORDER BY id ASC";
@@ -130,6 +163,12 @@ public class ProductDAO {
 
     }
 
+    /**
+     * Retrieves a product by its ID.
+     * @param id (The product ID).
+     * @return A [Product] object if found, otherwise [null]
+     * @throws SQLException
+     * */
     public Product findProductById(Long id) throws SQLException {
         String sql = "SELECT * FROM products WHERE id = ?";
 
