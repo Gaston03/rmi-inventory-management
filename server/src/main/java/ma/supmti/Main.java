@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             /*
-            *  Initialize database by creating [Products] and [Users] tables
+            *  Initialize database by creating [products] and [users] tables
             * */
             DatabaseConnection.initializeDatabase();
             ProductService productService = new ProductServiceImpl();
