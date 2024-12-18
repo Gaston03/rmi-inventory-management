@@ -14,7 +14,7 @@ import java.util.Objects;
 * */
 public class DatabaseConnection {
     /*
-    * URL: Database connection string for PostgreSQL.
+    * URL: Database connection string for PostgresSQL.
     * USERNAME: Username for database authentication.
     * PASSWORD: Password for database authentication.
     * */
@@ -24,8 +24,8 @@ public class DatabaseConnection {
 
     /**
     * Establishes and returns a connection to the database.
-    * @returns: Connection object.
-    * @throws: SQLException if a connection error occurs.
+    * @return Connection object.
+    * @throws SQLException if a connection error occurs.
     * */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);

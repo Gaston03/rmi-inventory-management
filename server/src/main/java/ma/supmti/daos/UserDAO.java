@@ -24,10 +24,10 @@ public class UserDAO {
      * @throws SQLException if the registration fails
     * */
     public boolean register(UserDTO user) throws SQLException {
-        /* Generates a salt using generateSalt() */
+        /* Generates a salt */
         String salt = generateSalt();
 
-        /* Hashes the password with the salt using hashPassword(String password, String salt) */
+        /* Hashes the password with the salt */
         String hashedPassword = hashPassword(user.getPassword(), salt);
         String sql = "INSERT INTO users (username, password, salt)" +
                 "VALUES (?, ?, ?)";
