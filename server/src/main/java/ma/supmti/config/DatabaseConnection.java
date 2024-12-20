@@ -57,6 +57,7 @@ public class DatabaseConnection {
                     ");");
 
         } catch (SQLException e) {
+            System.out.println("Failed to initialize database:");
             e.printStackTrace();
         }
     }
@@ -85,8 +86,7 @@ public class DatabaseConnection {
             stmt.executeUpdate(sql.toString());
             System.out.println("Test data inserted successfully.");
         } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("An error occurred when inserting test data.");
+            System.err.println("An error occurred when inserting test data: " + e.getMessage());
         }
     }
 }

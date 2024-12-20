@@ -16,7 +16,7 @@ public class UserServiceImpl extends UnicastRemoteObject implements UserService 
 
     /**
      * @param user
-     * @return
+     * @return boolean
      * @throws RemoteException
      */
     @Override
@@ -26,7 +26,7 @@ public class UserServiceImpl extends UnicastRemoteObject implements UserService 
 
     /**
      * @param user
-     * @return
+     * @return boolean
      * @throws RemoteException
      */
     @Override

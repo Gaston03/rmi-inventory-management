@@ -41,7 +41,7 @@ public class Main {
 
             System.out.println("Server is running...");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Failed to run the server: " + e.getMessage() + "\nCause: " + e.getCause());
         }
     }
 }

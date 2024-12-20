@@ -28,7 +28,7 @@ public class UserDAO {
         String salt = generateSalt();
 
         /* Hashes the password with the salt */
-        String hashedPassword = hashPassword(user.getPassword(), salt);
+        String hashedPassword = hashPassword(user.password(), salt);
         String sql = "INSERT INTO users (username, password, salt)" +
                 "VALUES (?, ?, ?)";
 
@@ -36,7 +36,7 @@ public class UserDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             /* Inserts data into the users table */
-            stmt.setString(1, user.getUsername());
+            stmt.setString(1, user.username());
             stmt.setString(2, hashedPassword);
             stmt.setString(3, salt);
 
@@ -45,7 +45,7 @@ public class UserDAO {
             return affectedRows != 0;
 
         } catch (SQLException e) {
-            System.out.println("An error occurred: " + e.getMessage());
+            System.out.println("Failed to register user: " + e.getMessage());
             throw new SQLException(e);
         }
     }
@@ -62,7 +62,7 @@ public class UserDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, user.getUsername());
+            stmt.setString(1, user.username());
 
             /* Fetches the stored hashed password and salt from the users table */
             try (ResultSet rs = stmt.executeQuery()) {
@@ -71,12 +71,13 @@ public class UserDAO {
                     String salt = rs.getString("salt");
 
                     /* Verify the input password against the stored hash */
-                    return verifyPassword(user.getPassword(), storedHash, salt);
+                    return verifyPassword(user.password(), storedHash, salt);
                 }
 
                 return false;
             }
         } catch (SQLException e) {
+            System.out.println("Failed to log user in: " + e.getMessage());
             throw new SQLException(e);
         }
 
