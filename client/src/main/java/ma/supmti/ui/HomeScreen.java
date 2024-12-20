@@ -219,12 +219,12 @@ public class HomeScreen extends JFrame {
             return;
         }
 
-        Product selected = products.get(selectedRow);
+        Product selectedProduct = products.get(selectedRow);
 
-        JTextField nameField = new JTextField(selected.getName());
-        JTextField categoryField = new JTextField(selected.getCategory());
-        JTextField quantityField = new JTextField(String.valueOf(selected.getQuantity()));
-        JTextField priceField = new JTextField(String.valueOf(selected.getPrice()));
+        JTextField nameField = new JTextField(selectedProduct.getName());
+        JTextField categoryField = new JTextField(selectedProduct.getCategory());
+        JTextField quantityField = new JTextField(String.valueOf(selectedProduct.getQuantity()));
+        JTextField priceField = new JTextField(String.valueOf(selectedProduct.getPrice()));
 
         Object[] fields = {
                 "Name: ", nameField,
@@ -243,7 +243,7 @@ public class HomeScreen extends JFrame {
                 Long quantity = Long.parseLong(quantityField.getText());
                 Double price = Double.parseDouble(priceField.getText());
 
-                boolean isUpdateOk = listenner.getProductService().updateProduct(new ProductDTO(name, category, price, quantity), selected.getId());
+                boolean isUpdateOk = listenner.getProductService().updateProduct(new ProductDTO(name, category, price, quantity), selectedProduct.getId());
 
                 if (isUpdateOk) {
                     refreshTable();
@@ -274,7 +274,10 @@ public class HomeScreen extends JFrame {
                 "Confirm Delete", JOptionPane.YES_NO_OPTION);
 
         if (result == JOptionPane.YES_OPTION) {
-            boolean isDeletionOk = listenner.getProductService().deleteProduct((long) selectedRow);
+            System.out.println("Selected Row: " + selectedRow);
+            Product selectedProduct = products.get(selectedRow);
+
+            boolean isDeletionOk = listenner.getProductService().deleteProduct(selectedProduct.getId());
 
             if (isDeletionOk) {
                 refreshTable();
