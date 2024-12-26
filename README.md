@@ -11,7 +11,7 @@ The repository implements a client-server model using Java RMI, enabling remote 
 It includes functionalities for managing an inventory, likely including adding, updating, or querying items.
 
 ### 3. User Management:
-It includes functionalities for managing users, likely logging or registering user.**
+It includes functionalities for managing users, likely logging or registering user.
 
 ### 4. Java-based Implementation: 
 The entire project is written in Java, demonstrating how RMI can be used for distributed systems.
@@ -28,7 +28,7 @@ Contains the server-side logic, including the RMI implementation for inventory m
 ### Prerequisites
 - Java Development Kit (JDK) 21 or later
 - Apache Maven
-- Basic understanding of Java RMI
+- XAMPP
 
 ### Clone the Repository
 ```shell
@@ -44,14 +44,32 @@ mvn clean install
 
 ### Run Server
 Navigate to the `server` directory and run the server:
+##### Compile the project
 ```shell
-
+mvn compile
+```
+##### Generate jar file
+```shell
+mvn package
+```
+##### Execute the jar file
+```shell
+java -jar target/server-1.0.1.jar
 ```
 
-### Run Client
+### Run client
 Navigate to the `client` directory and run the client:
+##### Compile the project
 ```shell
-
+mvn compile
+```
+##### Generate jar file
+```shell
+mvn package
+```
+##### Execute the jar file
+```shell
+java -jar target/client-1.0.1.jar
 ```
 
 ## Author
