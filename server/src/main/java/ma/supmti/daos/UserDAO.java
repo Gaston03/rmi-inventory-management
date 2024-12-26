@@ -47,6 +47,8 @@ public class UserDAO {
         } catch (SQLException e) {
             System.out.println("Failed to register user: " + e.getMessage());
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,6 +81,8 @@ public class UserDAO {
         } catch (SQLException e) {
             System.out.println("Failed to log user in: " + e.getMessage());
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }

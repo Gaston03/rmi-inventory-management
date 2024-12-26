@@ -7,7 +7,6 @@ import ma.supmti.models.Product;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /*
 * The [ProductDAO] class manages database operations
@@ -38,6 +37,8 @@ public class ProductDAO {
 
         } catch (SQLException e) {
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -69,6 +70,8 @@ public class ProductDAO {
 
         } catch (SQLException e) {
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -90,6 +93,8 @@ public class ProductDAO {
             return affectedRows > 0;
         } catch (SQLException e) {
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -125,6 +130,8 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return products;
@@ -159,6 +166,8 @@ public class ProductDAO {
             return products;
         } catch (SQLException e) {
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -192,6 +201,8 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return null;

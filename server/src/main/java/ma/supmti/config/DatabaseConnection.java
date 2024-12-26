@@ -14,20 +14,21 @@ import java.util.Objects;
 * */
 public class DatabaseConnection {
     /*
-    * URL: Database connection string for PostgresSQL.
+    * URL: Database connection string for MySQL.
     * USERNAME: Username for database authentication.
     * PASSWORD: Password for database authentication.
     * */
-    private static final String URL = "jdbc:postgresql://dpg-ct7oddtumphs73905h10-a.frankfurt-postgres.render.com:5432/gestion_inventaire";
-    private static final String USERNAME = "ulysse";
-    private static final String PASSWORD = "24wDgfAC5tq0NX4iVFmpaVSNBC9ILaQg";
+    private static final String URL = "jdbc:mysql://localhost:3306/inventory-management";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "";
 
     /**
     * Establishes and returns a connection to the database.
     * @return Connection object.
     * @throws SQLException if a connection error occurs.
     * */
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
@@ -56,7 +57,7 @@ public class DatabaseConnection {
                     "salt VARCHAR(255) NOT NULL" +
                     ");");
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Failed to initialize database:");
             e.printStackTrace();
         }
