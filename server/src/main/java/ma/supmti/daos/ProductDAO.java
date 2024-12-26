@@ -106,7 +106,7 @@ public class ProductDAO {
      * */
     public List<Product> findProductByCategory(String category) throws SQLException {
         String sql = "SELECT * FROM " +
-                "products WHERE category ILIKE ? " +
+                "products WHERE LOWER(category) LIKE LOWER(?) " +
                 "ORDER BY id ASC";
         List<Product> products = new ArrayList<>();
 

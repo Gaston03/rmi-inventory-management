@@ -5,6 +5,7 @@ import ma.supmti.dtos.ProductDTO;
 import ma.supmti.models.Product;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.rmi.NotBoundException;
@@ -39,18 +40,47 @@ public class HomeScreen extends JFrame {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         searchField = new JTextField(20);
 
-        JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(e -> {
-            try {
-                searchProducts();
-            } catch (SQLException | RemoteException ex) {
-                throw new RuntimeException(ex);
+//        JButton searchButton = new JButton("Search");
+//        searchButton.addActionListener(e -> {
+//            try {
+//                searchProducts();
+//            } catch (SQLException | RemoteException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//        });
+
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                try {
+                    searchProducts();
+                } catch (SQLException | RemoteException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                try {
+                    searchProducts();
+                } catch (SQLException | RemoteException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                try {
+                    searchProducts();
+                } catch (SQLException | RemoteException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
         searchPanel.add(new JLabel("Search: "));
         searchPanel.add(searchField);
-        searchPanel.add(searchButton);
+//        searchPanel.add(searchButton);
         add(searchPanel, BorderLayout.NORTH);
 
         // Create right panel for logout button
@@ -154,20 +184,31 @@ public class HomeScreen extends JFrame {
 
     private void searchProducts() throws SQLException, RemoteException {
         String searchTerm = searchField.getText();
-        tableModel.setRowCount(0);
 
-        List<Product> searchedProducts = listenner.getProductService().findProductsByCategory(searchTerm);
-        for (Product product : searchedProducts) {
-            Object[] row = {
-                    product.getId(),
-                    product.getName(),
-                    product.getCategory(),
-                    product.getQuantity(),
-                    String.format("%.2f", product.getPrice()),
-            };
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                tableModel.setRowCount(0);
 
-            tableModel.addRow(row);
-        }
+                List<Product> searchedProducts = listenner.getProductService().findProductsByCategory(searchTerm);
+                for (Product product : searchedProducts) {
+                    Object[] row = {
+                            product.getId(),
+                            product.getName(),
+                            product.getCategory(),
+                            product.getQuantity(),
+                            String.format("%.2f", product.getPrice()),
+                    };
+
+                    tableModel.addRow(row);
+                }
+
+                return null;
+            }
+        };
+
+        worker.execute();
+
     }
 
     private void addProduct() {
